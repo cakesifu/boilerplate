@@ -1,0 +1,6 @@
+node_modules
+assets/components
+npm-debug.log
+config/*.local.json
+.data/
+.dist/
