@@ -1,17 +1,3 @@
-var _ = require("lodash"),
-    models;
-
-
-models = {
+module.exports = {
   User: require("./user")
 };
-
-function modelsInit(app) {
-  if (app) {
-    app.set("models", models);
-  }
-}
-
-_.extend(modelsInit, models);
-
-module.exports = modelsInit;

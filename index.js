@@ -1,10 +1,9 @@
 var config = require("./config"),
     logger = require("./lib/logger"),
-    App = require("./server"),
-    app;
+    app = require("./server"),
+    port = config.get("port");
 
-app = new App(config);
-app.start(config.get("port"), function(err) {
-  logger.info("App started on port %s",  app.port);
+app(config).listen(port, function(err) {
+  logger.info("App started on port %s",  port);
 });
 

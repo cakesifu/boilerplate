@@ -1,20 +1,13 @@
-var _ = require("lodash"),
-    routes;
-
-routes = {
-  "home": "/",
-  "auth": "/auth",
-  "session": "/session",
-  "debug": "/debug" // TODO disable this in production
-};
+var auth = require("./auth"),
+    session = require("./session"),
+    home = require("./home"),
+    debug = require("./debug");
 
 module.exports = function(app) {
-  _.forEach(routes, function(path, moduleName) {
-    var Route = require("./" + moduleName),
-        route = Route(app);
 
-    if (path) {
-      app.use(path, route);
-    }
-  });
+  app.use("/debug", debug(app));
+  app.use("/auth", auth(app));
+
+  app.get("/", home.homepage);
+  app.get("/session", session.read);
 };

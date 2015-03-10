@@ -1,30 +1,21 @@
-var event = require("events"),
-    _ = require("lodash"),
-    util = require("util"),
-    Fluxxor = require("fluxxor"),
+var Fluxxor = require("fluxxor"),
     React = require("react"),
-    Application = require("./components/application"),
-    stores = require("./stores"),
-    actions = require("./actions"),
-    dom = React.DOM;
+    Application = require("./views/app"),
+    Stores = require("./stores"),
+    Actions = require("./actions");
 
-function App() {
-}
-
-App.createApp = function(element) {
+function init(element) {
   var app, appStores, flux;
 
-  appStores = {
-    "session": new stores.SessionStore()
-  };
+  flux = new Fluxxor.Flux(Stores(), Actions());
+  app = React.createElement(Application, { flux: flux });
 
-  flux = new Fluxxor.Flux(appStores, actions);
-  app = new Application({ flux: flux });
-
-  React.renderComponent(app, element);
-};
-
-var el = document.getElementById("ledger-client");
-if (el) {
-  App.createApp(el);
+  React.render(app, element);
 }
+
+var el = document.getElementById("client-app");
+if (el) {
+  init(el);
+}
+
+module.exports.init = init;

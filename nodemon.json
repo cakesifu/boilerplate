@@ -2,6 +2,6 @@
   "ignore": [
     "client/*",
     "scripts/*",
-    "Gulpfile.js"
+    "migrations/*"
   ]
 }

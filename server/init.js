@@ -1,14 +1,12 @@
 var logger = require("../lib/logger"),
-    _ = require("lodash"),
-    async = require("async"),
     express = require("express"),
     passport = require("passport"),
     bodyParser = require("body-parser"),
     cookieSession = require("cookie-session"),
     loggerMiddleware = require("morgan"),
 
-    routesInit = require("./routes"),
-    modelsInit = require("./models");
+    routes = require("./routes"),
+    models = require("./models");
 
 module.exports = function(app, config) {
 
@@ -38,8 +36,6 @@ module.exports = function(app, config) {
   app.use(passport.session());
 
   // initialize all the routes in the app
-  routesInit(app);
+  routes(app);
 
-  // initialize all the models
-  modelsInit(app);
 };
